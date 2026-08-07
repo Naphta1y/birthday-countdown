@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Counting Down to Nora's Birthday 🎂</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="petals" id="petals" aria-hidden="true"></div>
+
+  <main class="countdown-page">
+    <p class="eyebrow">Something wonderful is coming</p>
+    <h1 class="page-title">Nora's Birthday</h1>
+    <p class="page-sub">The countdown has begun&hellip;</p>
+
+    <div class="countdown-grid" id="countdownGrid">
+      <div class="count-unit">
+        <div class="count-card"><span class="count-value" id="daysVal">00</span></div>
+        <span class="count-label">Days</span>
+      </div>
+      <div class="count-unit">
+        <div class="count-card"><span class="count-value" id="hoursVal">00</span></div>
+        <span class="count-label">Hours</span>
+      </div>
+      <div class="count-unit">
+        <div class="count-card"><span class="count-value" id="minutesVal">00</span></div>
+        <span class="count-label">Minutes</span>
+      </div>
+      <div class="count-unit">
+        <div class="count-card"><span class="count-value" id="secondsVal">00</span></div>
+        <span class="count-label">Seconds</span>
+      </div>
+    </div>
+
+    <p class="target-date">🎂 11th August</p>
+
+    <div class="celebration-state" id="celebrationState" aria-hidden="true">
+      <h2>It's Today!</h2>
+      <p>Happy Birthday, Nora 🎉</p>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
