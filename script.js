@@ -136,26 +136,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const timer = setInterval(tick, 1000);
 
   /* ============================================================
-     9. MUSIC TOGGLE
+     9. MUSIC TOGGLE + AUTOPLAY ON LOAD
      ============================================================ */
   const musicBtn  = document.getElementById('musicBtn');
   const musicIcon = document.getElementById('musicIcon');
   const bgMusic   = document.getElementById('bgMusic');
   let   playing   = false;
 
+  function startMusic() {
+    bgMusic.volume = 0.35;
+    bgMusic.play().then(() => {
+      // Autoplay succeeded
+      playing = true;
+      if (musicIcon) musicIcon.textContent = '🎵';
+    }).catch(() => {
+      // Autoplay blocked by browser — user must interact first
+      playing = false;
+      if (musicIcon) musicIcon.textContent = '🔇';
+    });
+  }
+
+  // Attempt autoplay as soon as the page loads
+  if (bgMusic) {
+    startMusic();
+  }
+
+  // Button lets user manually toggle at any time
   if (musicBtn && bgMusic) {
     musicBtn.addEventListener('click', () => {
       if (playing) {
         bgMusic.pause();
         musicIcon.textContent = '🔇';
+        playing = false;
       } else {
         bgMusic.volume = 0.35;
-        bgMusic.play().catch(() => {
-          // Autoplay blocked — silently ignore; user can retry
-        });
-        musicIcon.textContent = '🎵';
+        bgMusic.play().then(() => {
+          musicIcon.textContent = '🎵';
+          playing = true;
+        }).catch(() => {});
       }
-      playing = !playing;
     });
   }
 });
