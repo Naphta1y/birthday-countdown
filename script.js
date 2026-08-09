@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const phrases = [
     'The countdown has begun…',
     'Something wonderful is coming…',
-    'She deserves the world…',
     'August 11th is almost here…'
   ];
 
