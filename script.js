@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
      A sustained fireworks loop fires alongside confetti.
      ============================================================ */
   function launchFireworks(duration = 8000) {
-    if (reduceMotion) return;
+    if (reduceMotion || typeof confetti !== 'function') return;
     const end = Date.now() + duration;
     const defaults = { startVelocity: 30, spread: 360, ticks: 80, zIndex: 9999 };
 
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
     celebrationState.setAttribute('aria-hidden', 'false');
 
     // Fire initial confetti bursts
-    if (!reduceMotion) {
+    if (!reduceMotion && typeof confetti === 'function') {
       confetti({ particleCount: 180, spread: 130, startVelocity: 50, origin: { y: 0.55 }, colors: PALETTE });
       setTimeout(() => confetti({ particleCount: 120, spread: 110, origin: { x: 0.15, y: 0.6 }, colors: PALETTE }), 350);
       setTimeout(() => confetti({ particleCount: 120, spread: 110, origin: { x: 0.85, y: 0.6 }, colors: PALETTE }), 600);
@@ -266,6 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ============================================================
      TICK — runs every second
      ============================================================ */
+  let timer;
+
   function tick() {
     const now  = new Date();
     const diff = TARGET_DATE - now;
@@ -279,7 +281,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       // ENHANCEMENT 10: update browser tab title on birthday
       document.title = "🎉 It's Today! Happy Birthday, Nora!";
-      clearInterval(timer);
+      if (timer) {
+        clearInterval(timer);
+      }
       return;
     }
 
@@ -298,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   tick();
-  const timer = setInterval(tick, 1000);
+  timer = setInterval(tick, 1000);
 
   /* ============================================================
      MUSIC TOGGLE + AUTOPLAY ON LOAD
